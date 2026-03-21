@@ -10,18 +10,18 @@ If Codex desktop app terminology feels fuzzy, this mental model is the one that 
 
 - A **project** is an entry in your sidebar tied to a local folder/workspace.
 - A **thread** is a conversation inside that project.
-- A **Codex-managed worktree** is an isolated checkout Codex can use for thread work.
-- A **permanent worktree** is a long-lived isolated checkout that appears as its own project and is not auto-deleted.
+- A **Codex-managed worktree** is a separate checkout Codex can use for thread work.
+- A **permanent worktree** is a long-lived separate checkout that appears as its own project and is not auto-deleted.
 
-## What "Isolated Lane" Means in the App
+## What Worktree Mode Means in the App
 
-In Codex app terms, an isolated lane means your work is happening in a different checkout than your main Local checkout for that repo.
+In Codex app terms, Worktree mode means your thread runs in a different checkout than your main Local checkout for that repo.
 
 That separation prevents common collisions:
 
-- New files generated in one lane do not appear in another lane by accident.
-- Dependency installs and build artifacts stay scoped to the lane you are using.
-- Branch and working-copy state in one lane does not disrupt your active Local lane.
+- New files generated in one checkout do not appear in the other by accident.
+- Dependency installs and build artifacts stay scoped to the checkout you are using.
+- Branch and working-copy state in one checkout does not disrupt your active Local checkout.
 
 This is why permanent worktrees are useful for longer efforts: they give you a stable, separate workspace without constant context switching.
 
@@ -29,7 +29,7 @@ This is why permanent worktrees are useful for longer efforts: they give you a s
 
 Use this rule of thumb:
 
-- **Create a new project** when you are switching to a different folder/repository, or when you want a separate long-lived lane from the same repo.
+- **Create a new project** when you are switching to a different folder/repository, or when you want a separate long-lived permanent worktree from the same repo.
 - **Reuse an existing project** when you are still in the same folder and just starting another task; create a new thread instead.
 
 If your work will continue over many sessions in the same repo and you want hard isolation, create a permanent worktree project.
@@ -71,7 +71,7 @@ In Codex desktop app:
 2. Find worktree cleanup/retention controls.
 3. Change the managed-worktree retention limit, or disable automatic deletion if you prefer manual cleanup.
 
-If you never want a lane auto-deleted, use a permanent worktree for that lane.
+If you never want a checkout auto-deleted, use a permanent worktree.
 
 ## Practical Cleanup Workflow
 
@@ -79,7 +79,7 @@ For old items:
 
 1. Archive stale threads.
 2. Remove no-longer-needed projects from the sidebar.
-3. Keep only active long-running lanes as permanent worktrees.
+3. Keep only active long-running efforts as permanent worktrees.
 
 This keeps the sidebar and disk usage under control without losing active context.
 
