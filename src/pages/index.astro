@@ -28,7 +28,8 @@ const articles = [
   },
 ];
 
-const [featuredArticle, ...otherArticles] = articles;
+const featuredArticle = articles[0] ?? null;
+const otherArticles = articles.slice(1);
 ---
 
 <Base
@@ -57,16 +58,20 @@ const [featuredArticle, ...otherArticles] = articles;
       Codex workflows to policy and governance patterns.
     </p>
 
-    <article class="featured-article">
-      <p class="article-kicker">
-        {featuredArticle.category} · {featuredArticle.date}
-      </p>
-      <h3>
-        <a href={featuredArticle.href}>{featuredArticle.title}</a>
-      </h3>
-      <p>{featuredArticle.description}</p>
-      <a class="read-more" href={featuredArticle.href}>Read featured article →</a>
-    </article>
+    {
+      featuredArticle && (
+        <article class="featured-article">
+          <p class="article-kicker">
+            {featuredArticle.category} · {featuredArticle.date}
+          </p>
+          <h3>
+            <a href={featuredArticle.href}>{featuredArticle.title}</a>
+          </h3>
+          <p>{featuredArticle.description}</p>
+          <a class="read-more" href={featuredArticle.href}>Read featured article →</a>
+        </article>
+      )
+    }
 
     <div class="article-grid">
       {
