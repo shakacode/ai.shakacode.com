@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="360" viewBox="0 0 960 360" role="img" aria-labelledby="title desc">
+  <title id="title">Failure cascade and repair</title>
+  <desc id="desc">Diagram showing the path from copied state to stale /root references, runtime failure, path rewrite, restart, and restored replies.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#0f172a"/>
+    </marker>
+    <style>
+      .bg { fill: #fffdf8; }
+      .ok { fill: #ecfccb; stroke: #3f6212; stroke-width: 2; rx: 16; ry: 16; }
+      .warn { fill: #fee2e2; stroke: #991b1b; stroke-width: 2; rx: 16; ry: 16; }
+      .fix { fill: #e0f2fe; stroke: #0369a1; stroke-width: 2; rx: 16; ry: 16; }
+      .label { font: 600 20px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #0f172a; }
+      .small { font: 400 15px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #334155; }
+      .arrow { stroke: #0f172a; stroke-width: 3; fill: none; marker-end: url(#arrow); }
+    </style>
+  </defs>
+  <rect class="bg" width="960" height="360"/>
+
+  <rect class="ok" x="40" y="42" width="190" height="78"/>
+  <text class="label" x="70" y="78">State copied</text>
+  <text class="small" x="70" y="104">OpenClaw dir arrives on Mac</text>
+
+  <rect class="ok" x="278" y="42" width="190" height="78"/>
+  <text class="label" x="306" y="78">Gateway starts</text>
+  <text class="small" x="306" y="104">Status looks healthy</text>
+
+  <rect class="warn" x="516" y="42" width="190" height="78"/>
+  <text class="label" x="548" y="78">Hidden defect</text>
+  <text class="small" x="548" y="104">Session state still points to /root</text>
+
+  <rect class="warn" x="754" y="42" width="166" height="78"/>
+  <text class="label" x="780" y="78">Runtime crash</text>
+  <text class="small" x="780" y="104">ENOENT mkdir '/root'</text>
+
+  <rect class="fix" x="224" y="218" width="220" height="88"/>
+  <text class="label" x="254" y="256">Rewrite migrated paths</text>
+  <text class="small" x="254" y="282">openclaw.json + sessions + cron</text>
+
+  <rect class="fix" x="492" y="218" width="190" height="88"/>
+  <text class="label" x="522" y="256">Restart gateway</text>
+  <text class="small" x="522" y="282">Load repaired state</text>
+
+  <rect class="ok" x="730" y="218" width="190" height="88"/>
+  <text class="label" x="762" y="256">Replies restored</text>
+  <text class="small" x="762" y="282">Slack + WhatsApp both work</text>
+
+  <path class="arrow" d="M 230 81 L 278 81"/>
+  <path class="arrow" d="M 468 81 L 516 81"/>
+  <path class="arrow" d="M 706 81 L 754 81"/>
+  <path class="arrow" d="M 837 120 L 837 178 L 334 178 L 334 218"/>
+  <path class="arrow" d="M 444 262 L 492 262"/>
+  <path class="arrow" d="M 682 262 L 730 262"/>
+</svg>
