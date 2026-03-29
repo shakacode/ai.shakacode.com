@@ -1,0 +1,120 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="470" viewBox="0 0 1120 470" role="img" aria-labelledby="title desc">
+  <title id="title">Failure cascade and repair</title>
+  <desc id="desc">Diagram showing copied state, misleadingly healthy status, stale Linux path references, runtime failure, repair, restart, and restored replies.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fffdf7" />
+      <stop offset="100%" stop-color="#f8fbff" />
+    </linearGradient>
+    <linearGradient id="good-fill" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f7fee7" />
+      <stop offset="100%" stop-color="#ecfccb" />
+    </linearGradient>
+    <linearGradient id="neutral-fill" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#eff6ff" />
+      <stop offset="100%" stop-color="#dbeafe" />
+    </linearGradient>
+    <linearGradient id="warn-fill" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fff7ed" />
+      <stop offset="100%" stop-color="#fed7aa" />
+    </linearGradient>
+    <linearGradient id="bad-fill" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fee2e2" />
+      <stop offset="100%" stop-color="#fecaca" />
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="160%">
+      <feDropShadow dx="0" dy="18" stdDeviation="18" flood-color="#0f172a" flood-opacity="0.08" />
+    </filter>
+    <marker id="arrow" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="10" markerHeight="10" orient="auto-start-reverse">
+      <path d="M 0 0 L 12 6 L 0 12 z" fill="#1e293b" />
+    </marker>
+    <style><![CDATA[
+      .band { fill: rgba(255,255,255,0.82); stroke: #e2e8f0; stroke-width: 1.25; }
+      .band-label { font: 700 12px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; letter-spacing: 0.16em; text-transform: uppercase; fill: #475569; }
+      .card { stroke: #cbd5e1; stroke-width: 1.5; }
+      .title { font: 700 26px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #0f172a; }
+      .body { font: 500 17px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #334155; }
+      .meta { font: 600 15px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #475569; }
+      .line { stroke: #1e293b; stroke-width: 4; fill: none; marker-end: url(#arrow); }
+      .note-pill { fill: rgba(255,255,255,0.96); stroke: #f59e0b; stroke-width: 1.25; }
+      .note-text { font: 700 14px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #b45309; }
+    ]]></style>
+  </defs>
+
+  <rect width="1120" height="470" rx="28" fill="url(#bg)" />
+  <circle cx="1048" cy="82" r="132" fill="#dbeafe" opacity="0.45" />
+  <circle cx="98" cy="398" r="116" fill="#fde68a" opacity="0.26" />
+
+  <rect class="band" x="58" y="52" width="206" height="30" rx="15" />
+  <text class="band-label" x="83" y="72">False confidence</text>
+
+  <rect class="band" x="442" y="258" width="192" height="30" rx="15" />
+  <text class="band-label" x="470" y="278">Actual repair</text>
+
+  <rect class="card" x="52" y="108" width="206" height="98" rx="24" fill="url(#good-fill)" filter="url(#shadow)" />
+  <text class="title" x="80" y="150">State copied</text>
+  <text class="body" x="80" y="182">
+    <tspan x="80" dy="0">OpenClaw directory</tspan>
+    <tspan x="80" dy="22">lands on the Mac</tspan>
+  </text>
+
+  <rect class="card" x="292" y="108" width="206" height="98" rx="24" fill="url(#neutral-fill)" filter="url(#shadow)" />
+  <text class="title" x="322" y="150">Gateway starts</text>
+  <text class="body" x="322" y="182">
+    <tspan x="322" dy="0">Process boots and</tspan>
+    <tspan x="322" dy="22">status is available</tspan>
+  </text>
+
+  <rect class="card" x="532" y="108" width="230" height="98" rx="24" fill="url(#warn-fill)" filter="url(#shadow)" />
+  <text class="title" x="560" y="150">Looks healthy</text>
+  <text class="body" x="560" y="182">
+    <tspan x="560" dy="0">Slack and WhatsApp</tspan>
+    <tspan x="560" dy="22">still appear connected</tspan>
+  </text>
+
+  <rect class="note-pill" x="578" y="70" width="138" height="32" rx="16" />
+  <text class="note-text" x="600" y="90">Status lied here</text>
+
+  <rect class="card" x="796" y="108" width="272" height="98" rx="24" fill="url(#bad-fill)" filter="url(#shadow)" />
+  <text class="title" x="824" y="150">Hidden defect</text>
+  <text class="body" x="824" y="182">
+    <tspan x="824" dy="0">Migrated session state</tspan>
+    <tspan x="824" dy="22">still points at /root</tspan>
+  </text>
+
+  <rect class="card" x="796" y="248" width="272" height="104" rx="24" fill="url(#bad-fill)" filter="url(#shadow)" />
+  <text class="title" x="824" y="292">Runtime crash</text>
+  <text class="body" x="824" y="324">
+    <tspan x="824" dy="0">Inbound message hits</tspan>
+    <tspan x="824" dy="22">ENOENT mkdir '/root'</tspan>
+  </text>
+
+  <rect class="card" x="220" y="312" width="246" height="110" rx="24" fill="url(#neutral-fill)" filter="url(#shadow)" />
+  <text class="title" x="248" y="356">Rewrite paths</text>
+  <text class="body" x="248" y="388">
+    <tspan x="248" dy="0">openclaw.json, sessions,</tspan>
+    <tspan x="248" dy="22">approvals, cron</tspan>
+  </text>
+
+  <rect class="card" x="500" y="312" width="212" height="110" rx="24" fill="url(#neutral-fill)" filter="url(#shadow)" />
+  <text class="title" x="528" y="356">Restart gateway</text>
+  <text class="body" x="528" y="388">
+    <tspan x="528" dy="0">Load the repaired</tspan>
+    <tspan x="528" dy="22">state cleanly</tspan>
+  </text>
+
+  <rect class="card" x="746" y="312" width="288" height="110" rx="24" fill="url(#good-fill)" filter="url(#shadow)" />
+  <text class="title" x="774" y="356">Replies restored</text>
+  <text class="body" x="774" y="388">
+    <tspan x="774" dy="0">Slack and WhatsApp</tspan>
+    <tspan x="774" dy="22">both round-trip again</tspan>
+  </text>
+
+  <path class="line" d="M 258 157 C 270 157, 280 157, 292 157" />
+  <path class="line" d="M 498 157 C 510 157, 520 157, 532 157" />
+  <path class="line" d="M 762 157 C 776 157, 784 157, 796 157" />
+  <path class="line" d="M 932 206 L 932 228" />
+  <path class="line" d="M 796 300 C 724 300, 642 300, 606 312" />
+  <path class="line" d="M 466 367 C 478 367, 488 367, 500 367" />
+  <path class="line" d="M 712 367 C 724 367, 734 367, 746 367" />
+</svg>

@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="460" viewBox="0 0 1120 460" role="img" aria-labelledby="title desc">
+  <title id="title">OpenClaw migration topology</title>
+  <desc id="desc">Diagram showing an Ubuntu source bridged through a main Mac into a destination Mac with separate admin and agents users.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f8fbff" />
+      <stop offset="100%" stop-color="#eef8f2" />
+    </linearGradient>
+    <linearGradient id="source-fill" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" />
+      <stop offset="100%" stop-color="#f8fafc" />
+    </linearGradient>
+    <linearGradient id="bridge-fill" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#eff6ff" />
+      <stop offset="100%" stop-color="#dbeafe" />
+    </linearGradient>
+    <linearGradient id="agent-fill" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f7fee7" />
+      <stop offset="100%" stop-color="#ecfccb" />
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="160%">
+      <feDropShadow dx="0" dy="18" stdDeviation="18" flood-color="#0f172a" flood-opacity="0.08" />
+    </filter>
+    <marker id="arrow" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="10" markerHeight="10" orient="auto-start-reverse">
+      <path d="M 0 0 L 12 6 L 0 12 z" fill="#1e293b" />
+    </marker>
+    <style><![CDATA[
+      .section-pill { fill: rgba(255,255,255,0.92); stroke: #cbd5e1; stroke-width: 1.25; }
+      .section-label { font: 700 12px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; letter-spacing: 0.16em; text-transform: uppercase; fill: #475569; }
+      .group-frame { fill: rgba(255,255,255,0.5); stroke: #cbd5e1; stroke-width: 1.5; stroke-dasharray: 8 8; }
+      .card { stroke: #cbd5e1; stroke-width: 1.5; }
+      .title { font: 700 30px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #0f172a; }
+      .body { font: 500 17px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #334155; }
+      .meta { font: 600 15px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #475569; }
+      .line { stroke: #1e293b; stroke-width: 4; fill: none; marker-end: url(#arrow); }
+      .flow-pill { fill: rgba(255,255,255,0.96); stroke: #bfdbfe; stroke-width: 1.25; }
+      .flow-text { font: 700 14px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #1d4ed8; }
+    ]]></style>
+  </defs>
+
+  <rect width="1120" height="460" rx="28" fill="url(#bg)" />
+  <circle cx="1010" cy="82" r="144" fill="#dbeafe" opacity="0.55" />
+  <circle cx="144" cy="392" r="120" fill="#dcfce7" opacity="0.5" />
+
+  <rect class="section-pill" x="82" y="72" width="92" height="30" rx="15" />
+  <text class="section-label" x="103" y="92">Source</text>
+
+  <rect class="section-pill" x="458" y="56" width="96" height="30" rx="15" />
+  <text class="section-label" x="477" y="76">Bridge</text>
+
+  <rect class="section-pill" x="826" y="40" width="138" height="30" rx="15" />
+  <text class="section-label" x="846" y="60">Destination Mac</text>
+
+  <rect class="group-frame" x="782" y="78" width="288" height="320" rx="28" />
+
+  <rect class="card" x="60" y="124" width="268" height="170" rx="26" fill="url(#source-fill)" filter="url(#shadow)" />
+  <text class="title" x="88" y="176">Ubuntu source</text>
+  <text class="body" x="88" y="212">Live OpenClaw runtime</text>
+  <text class="body" x="88" y="242">/root/.openclaw</text>
+  <text class="meta" x="88" y="274">Slack, WhatsApp, cron</text>
+
+  <rect class="card" x="410" y="108" width="300" height="202" rx="28" fill="url(#bridge-fill)" filter="url(#shadow)" />
+  <text class="title" x="442" y="160">Main Mac</text>
+  <text class="body" x="442" y="198">SSH trust to both sides</text>
+  <text class="body" x="442" y="228">Backup staging</text>
+  <text class="body" x="442" y="258">Bridge transfer scripts</text>
+  <text class="meta" x="442" y="290">Screen Sharing and review</text>
+
+  <rect class="card" x="810" y="104" width="232" height="110" rx="24" fill="url(#source-fill)" filter="url(#shadow)" />
+  <text class="title" x="838" y="146">Admin user</text>
+  <text class="body" x="838" y="178">
+    <tspan x="838" dy="0">Homebrew, SSH,</tspan>
+    <tspan x="838" dy="24">system setup</tspan>
+  </text>
+
+  <rect class="card" x="810" y="240" width="232" height="134" rx="24" fill="url(#agent-fill)" filter="url(#shadow)" />
+  <text class="title" x="838" y="274">Agents user</text>
+  <text class="body" x="838" y="306">
+    <tspan x="838" dy="0">/Users/&lt;agents-user&gt;</tspan>
+    <tspan x="838" dy="24">/.openclaw</tspan>
+  </text>
+  <text class="meta" x="838" y="356">Own browser identity and state</text>
+
+  <path class="line" d="M 328 210 C 360 210, 384 210, 410 210" />
+  <path class="line" d="M 710 176 C 748 164, 772 156, 810 156" />
+  <path class="line" d="M 710 262 C 746 276, 772 292, 810 306" />
+
+  <rect class="flow-pill" x="336" y="92" width="142" height="34" rx="17" />
+  <text class="flow-text" x="361" y="114">Backup + bridge</text>
+
+  <rect class="flow-pill" x="706" y="126" width="114" height="34" rx="17" />
+  <text class="flow-text" x="734" y="148">Bootstrap</text>
+
+  <rect class="flow-pill" x="700" y="294" width="126" height="34" rx="17" />
+  <text class="flow-text" x="728" y="316">State copy</text>
+</svg>

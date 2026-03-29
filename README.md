@@ -6,6 +6,7 @@ How ShakaCode approaches AI-assisted development: our governance model, industry
 
 ## Articles
 
+- **[Migrating OpenClaw from an Ubuntu Droplet to a Local Mac](https://ai.shakacode.com/openclaw-ubuntu-droplet-to-local-mac)** — A sanitized runbook for moving a live OpenClaw agent from Ubuntu to macOS while preserving long-lived state and fixing stale Linux path references.
 - **[Codex Desktop App: Projects, Worktrees, Threads, and Cleanup](https://ai.shakacode.com/codex-desktop-projects-worktrees-cleanup)** — A practical guide to the Codex desktop app model: when to create new projects, when to reuse them, and how auto-cleanup works.
 - **[The Executive Chef Model](https://ai.shakacode.com/executive-chef-model)** — How we govern AI-assisted development. Every engineer is an executive chef: use whatever AI tools you want, you own what you ship.
 - **[How 10 Companies Are Governing AI-Assisted Development in 2026](https://ai.shakacode.com/industry-survey)** — A survey of AI policies across Shopify, Meta, GitLab, Anthropic, Google/DORA, Amazon, and others.
