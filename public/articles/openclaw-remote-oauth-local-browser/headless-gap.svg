@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="420" viewBox="0 0 1120 420" role="img" aria-labelledby="title desc">
+  <title id="title">The headless VPS gap and the fix</title>
+  <desc id="desc">Diagram showing the disconnect between a headless VPS and a local browser, and how claw-auth bridges it with SSH port forwarding.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f8fbff" />
+      <stop offset="100%" stop-color="#fffdf7" />
+    </linearGradient>
+    <linearGradient id="problem-fill" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fffbeb" />
+      <stop offset="100%" stop-color="#fef3c7" />
+    </linearGradient>
+    <linearGradient id="fix-fill" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f0fdf4" />
+      <stop offset="100%" stop-color="#dcfce7" />
+    </linearGradient>
+    <linearGradient id="card-fill" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" />
+      <stop offset="100%" stop-color="#f8fafc" />
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="160%">
+      <feDropShadow dx="0" dy="14" stdDeviation="14" flood-color="#0f172a" flood-opacity="0.07" />
+    </filter>
+    <marker id="arrow-big" viewBox="0 0 16 16" refX="14" refY="8" markerWidth="12" markerHeight="12" orient="auto-start-reverse">
+      <path d="M 0 0 L 16 8 L 0 16 z" fill="#16a34a" />
+    </marker>
+    <style><![CDATA[
+      .section-pill { fill: rgba(255,255,255,0.92); stroke: #cbd5e1; stroke-width: 1.25; }
+      .section-label { font: 700 12px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; letter-spacing: 0.16em; text-transform: uppercase; fill: #475569; }
+      .card { stroke: #cbd5e1; stroke-width: 1.5; }
+      .title { font: 700 22px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #0f172a; }
+      .body { font: 500 15px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #334155; }
+      .meta { font: 600 13px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #64748b; }
+      .code { font: 600 14px "SF Mono", SFMono-Regular, Menlo, monospace; fill: #7c3aed; }
+      .gap-line { stroke: #dc2626; stroke-width: 3; fill: none; stroke-dasharray: 10 8; }
+      .fix-line { stroke: #16a34a; stroke-width: 4; fill: none; marker-end: url(#arrow-big); }
+      .group-problem { fill: url(#problem-fill); fill-opacity: 0.5; stroke: #fbbf24; stroke-width: 1.5; stroke-dasharray: 8 8; }
+      .group-fix { fill: url(#fix-fill); fill-opacity: 0.5; stroke: #86efac; stroke-width: 1.5; stroke-dasharray: 8 8; }
+    ]]></style>
+  </defs>
+
+  <rect width="1120" height="420" rx="28" fill="url(#bg)" />
+
+  <!-- Problem side (left) -->
+  <rect class="group-problem" x="40" y="40" width="480" height="340" rx="24" />
+  <rect class="section-pill" x="60" y="52" width="200" height="30" rx="15" style="stroke: #fbbf24;" />
+  <text class="section-label" x="80" y="72" style="fill: #b45309;">The Headless VPS Gap</text>
+
+  <rect class="card" x="70" y="100" width="200" height="110" rx="20" fill="url(#card-fill)" filter="url(#shadow)" />
+  <text class="title" x="100" y="134">VPS</text>
+  <text class="body" x="100" y="162">OpenClaw running</text>
+  <text class="meta" x="100" y="184">No browser available</text>
+
+  <rect class="card" x="70" y="230" width="200" height="90" rx="20" fill="url(#card-fill)" filter="url(#shadow)" />
+  <text class="title" x="100" y="264" style="fill: #b45309;">OAuth needs</text>
+  <text class="body" x="100" y="290">callback to</text>
+  <text class="code" x="100" y="308" style="font-size: 12px;">127.0.0.1:1455</text>
+
+  <rect class="card" x="300" y="100" width="200" height="110" rx="20" fill="url(#card-fill)" filter="url(#shadow)" />
+  <text class="title" x="330" y="134">Your Mac</text>
+  <text class="body" x="330" y="162">Browser is here</text>
+  <text class="meta" x="330" y="184">Different machine</text>
+
+  <!-- Gap indicator -->
+  <path class="gap-line" d="M 270 155 L 300 155" />
+  <text style="font: 700 28px -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; fill: #dc2626;" x="272" y="145">&#x2716;</text>
+  <text style="font: 600 13px -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; fill: #dc2626;" x="300" y="240">Callback can't reach VPS</text>
+
+  <!-- Big arrow from problem to fix -->
+  <path class="fix-line" d="M 530 210 C 560 210, 580 210, 600 210" />
+
+  <!-- Fix side (right) -->
+  <rect class="group-fix" x="600" y="40" width="480" height="340" rx="24" />
+  <rect class="section-pill" x="620" y="52" width="220" height="30" rx="15" style="stroke: #86efac;" />
+  <text class="section-label" x="640" y="72" style="fill: #16a34a;">claw-auth Bridges It</text>
+
+  <rect class="card" x="630" y="100" width="220" height="100" rx="20" fill="url(#card-fill)" filter="url(#shadow)" />
+  <text class="title" x="660" y="134" style="fill: #6d28d9;">SSH tunnel</text>
+  <text class="code" x="660" y="162">-L 1455:127.0.0.1:1455</text>
+  <text class="meta" x="660" y="184">Temporary, close after auth</text>
+
+  <rect class="card" x="880" y="100" width="180" height="100" rx="20" fill="url(#card-fill)" filter="url(#shadow)" />
+  <text class="title" x="906" y="134">Port map</text>
+  <text class="body" x="906" y="162">Mac :1455</text>
+  <text class="body" x="906" y="182">&#x2192; VPS :1455</text>
+
+  <rect class="card" x="630" y="230" width="430" height="100" rx="20" fill="url(#fix-fill)" filter="url(#shadow)" style="stroke: #86efac;" />
+  <text class="title" x="660" y="268" style="fill: #16a34a;">Browser callback lands on VPS &#x2713;</text>
+  <text class="body" x="660" y="296">OAuth completes. Token stored on VPS.</text>
+  <text class="meta" x="660" y="316">Close claw-auth. Use claw for work.</text>
+
+  <path style="stroke: #16a34a; stroke-width: 2; fill: none;" d="M 850 200 L 850 230" />
+</svg>

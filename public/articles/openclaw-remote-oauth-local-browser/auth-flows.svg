@@ -1,0 +1,121 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="520" viewBox="0 0 1120 520" role="img" aria-labelledby="title desc">
+  <title id="title">Two auth flows compared</title>
+  <desc id="desc">Comparison of device code flow (works anywhere) versus OAuth redirect flow (needs localhost callback on the VPS).</desc>
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f8fbff" />
+      <stop offset="100%" stop-color="#fffdf7" />
+    </linearGradient>
+    <linearGradient id="good-fill" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f0fdf4" />
+      <stop offset="100%" stop-color="#dcfce7" />
+    </linearGradient>
+    <linearGradient id="warn-fill" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fffbeb" />
+      <stop offset="100%" stop-color="#fef3c7" />
+    </linearGradient>
+    <linearGradient id="card-fill" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" />
+      <stop offset="100%" stop-color="#f8fafc" />
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="160%">
+      <feDropShadow dx="0" dy="18" stdDeviation="18" flood-color="#0f172a" flood-opacity="0.08" />
+    </filter>
+    <marker id="arrow-green" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="10" markerHeight="10" orient="auto-start-reverse">
+      <path d="M 0 0 L 12 6 L 0 12 z" fill="#16a34a" />
+    </marker>
+    <marker id="arrow-amber" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="10" markerHeight="10" orient="auto-start-reverse">
+      <path d="M 0 0 L 12 6 L 0 12 z" fill="#d97706" />
+    </marker>
+    <marker id="arrow-red" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="10" markerHeight="10" orient="auto-start-reverse">
+      <path d="M 0 0 L 12 6 L 0 12 z" fill="#dc2626" />
+    </marker>
+    <style><![CDATA[
+      .section-pill { fill: rgba(255,255,255,0.92); stroke: #cbd5e1; stroke-width: 1.25; }
+      .section-label { font: 700 12px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; letter-spacing: 0.16em; text-transform: uppercase; fill: #475569; }
+      .card { stroke: #cbd5e1; stroke-width: 1.5; }
+      .title { font: 700 26px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #0f172a; }
+      .body { font: 500 16px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #334155; }
+      .step-num { font: 700 14px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #ffffff; }
+      .step-label { font: 600 15px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #0f172a; }
+      .step-detail { font: 400 13px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #64748b; }
+      .line-ok { stroke: #16a34a; stroke-width: 3; fill: none; marker-end: url(#arrow-green); }
+      .line-amber { stroke: #d97706; stroke-width: 3; fill: none; marker-end: url(#arrow-amber); }
+      .line-fail { stroke: #dc2626; stroke-width: 3; fill: none; marker-end: url(#arrow-red); stroke-dasharray: 8 6; }
+      .result-ok { font: 700 16px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #16a34a; }
+      .result-fail { font: 700 16px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #dc2626; }
+      .group-frame { fill: none; stroke: #cbd5e1; stroke-width: 1.5; stroke-dasharray: 8 8; }
+    ]]></style>
+  </defs>
+
+  <rect width="1120" height="520" rx="28" fill="url(#bg)" />
+  <circle cx="980" cy="100" r="120" fill="#dcfce7" opacity="0.4" />
+  <circle cx="140" cy="440" r="100" fill="#fef3c7" opacity="0.4" />
+
+  <!-- Device Code Flow (top) -->
+  <rect class="group-frame" x="40" y="40" width="1040" height="200" rx="24" style="fill: url(#good-fill); fill-opacity: 0.3;" />
+  <rect class="section-pill" x="60" y="52" width="220" height="30" rx="15" style="stroke: #86efac;" />
+  <text class="section-label" x="80" y="72" style="fill: #16a34a;">Device Code Flow</text>
+
+  <rect class="card" x="70" y="100" width="210" height="110" rx="20" fill="url(#card-fill)" filter="url(#shadow)" />
+  <circle cx="96" cy="122" r="14" fill="#16a34a" />
+  <text class="step-num" x="92" y="127">1</text>
+  <text class="step-label" x="118" y="127">CLI shows URL + code</text>
+  <text class="step-detail" x="86" y="156">codex login --device-auth</text>
+  <text class="step-detail" x="86" y="176">prints a URL and one-time code</text>
+
+  <rect class="card" x="320" y="100" width="220" height="110" rx="20" fill="url(#card-fill)" filter="url(#shadow)" />
+  <circle cx="346" cy="122" r="14" fill="#16a34a" />
+  <text class="step-num" x="342" y="127">2</text>
+  <text class="step-label" x="368" y="127">Open in any browser</text>
+  <text class="step-detail" x="336" y="156">Any browser, any machine.</text>
+  <text class="step-detail" x="336" y="176">Type the code manually.</text>
+
+  <rect class="card" x="580" y="100" width="210" height="110" rx="20" fill="url(#card-fill)" filter="url(#shadow)" />
+  <circle cx="606" cy="122" r="14" fill="#16a34a" />
+  <text class="step-num" x="602" y="127">3</text>
+  <text class="step-label" x="628" y="127">CLI polls for token</text>
+  <text class="step-detail" x="596" y="156">No callback needed.</text>
+  <text class="step-detail" x="596" y="176">CLI picks up the token.</text>
+
+  <rect class="card" x="840" y="112" width="210" height="76" rx="20" fill="url(#good-fill)" filter="url(#shadow)" style="stroke: #86efac;" />
+  <text class="result-ok" x="870" y="158">Token stored &#x2713;</text>
+
+  <path class="line-ok" d="M 280 155 C 298 155, 306 155, 320 155" />
+  <path class="line-ok" d="M 540 155 C 558 155, 566 155, 580 155" />
+  <path class="line-ok" d="M 790 155 C 808 155, 820 155, 840 155" />
+
+  <!-- OAuth Redirect Flow (bottom) -->
+  <rect class="group-frame" x="40" y="280" width="1040" height="200" rx="24" style="fill: url(#warn-fill); fill-opacity: 0.3;" />
+  <rect class="section-pill" x="60" y="292" width="260" height="30" rx="15" style="stroke: #fbbf24;" />
+  <text class="section-label" x="80" y="312" style="fill: #b45309;">OAuth Redirect Flow (OpenClaw)</text>
+
+  <rect class="card" x="70" y="340" width="210" height="110" rx="20" fill="url(#card-fill)" filter="url(#shadow)" />
+  <circle cx="96" cy="362" r="14" fill="#d97706" />
+  <text class="step-num" x="92" y="367">1</text>
+  <text class="step-label" x="118" y="367">CLI opens OAuth URL</text>
+  <text class="step-detail" x="86" y="396">OpenClaw starts a listener</text>
+  <text class="step-detail" x="86" y="416">on 127.0.0.1:1455</text>
+
+  <rect class="card" x="320" y="340" width="220" height="110" rx="20" fill="url(#card-fill)" filter="url(#shadow)" />
+  <circle cx="346" cy="362" r="14" fill="#d97706" />
+  <text class="step-num" x="342" y="367">2</text>
+  <text class="step-label" x="368" y="367">Log in via browser</text>
+  <text class="step-detail" x="336" y="396">Your browser is on your Mac.</text>
+  <text class="step-detail" x="336" y="416">OpenClaw is on the VPS.</text>
+
+  <rect class="card" x="580" y="340" width="220" height="110" rx="20" fill="url(#card-fill)" filter="url(#shadow)" />
+  <circle cx="606" cy="362" r="14" fill="#d97706" />
+  <text class="step-num" x="602" y="367">3</text>
+  <text class="step-label" x="628" y="367">Browser redirects</text>
+  <text class="step-detail" x="596" y="396">Callback goes to</text>
+  <text class="step-detail" x="596" y="416">127.0.0.1:1455 on your Mac</text>
+
+  <rect class="card" x="840" y="352" width="220" height="76" rx="20" fill="#fef2f2" filter="url(#shadow)" style="stroke: #fca5a5;" />
+  <text class="result-fail" x="860" y="380">&#x274c; Nothing listening</text>
+  <text class="step-detail" x="860" y="404">Mac port 1455 is empty</text>
+
+  <path class="line-amber" d="M 280 395 C 298 395, 306 395, 320 395" />
+  <path class="line-amber" d="M 540 395 C 558 395, 566 395, 580 395" />
+  <path class="line-fail" d="M 800 395 C 818 395, 826 395, 840 395" />
+</svg>

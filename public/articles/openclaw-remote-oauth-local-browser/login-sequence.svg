@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="600" viewBox="0 0 1120 600" role="img" aria-labelledby="title desc">
+  <title id="title">OAuth login sequence</title>
+  <desc id="desc">Step-by-step sequence showing the SSH tunnel OAuth login flow from opening the tunnel through token verification.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f8fbff" />
+      <stop offset="100%" stop-color="#fffdf7" />
+    </linearGradient>
+    <linearGradient id="card-fill" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" />
+      <stop offset="100%" stop-color="#f8fafc" />
+    </linearGradient>
+    <linearGradient id="ok-fill" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f0fdf4" />
+      <stop offset="100%" stop-color="#dcfce7" />
+    </linearGradient>
+    <linearGradient id="warn-fill" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fffbeb" />
+      <stop offset="100%" stop-color="#fef3c7" />
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="160%">
+      <feDropShadow dx="0" dy="12" stdDeviation="12" flood-color="#0f172a" flood-opacity="0.06" />
+    </filter>
+    <style><![CDATA[
+      .card { stroke: #cbd5e1; stroke-width: 1.5; }
+      .step-num { font: 700 18px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #ffffff; }
+      .step-title { font: 700 17px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #0f172a; }
+      .step-detail { font: 500 14px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #475569; }
+      .code { font: 500 13px "SF Mono", SFMono-Regular, Menlo, monospace; fill: #6d28d9; }
+      .where { font: 600 12px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; letter-spacing: 0.1em; text-transform: uppercase; }
+      .connector { stroke: #cbd5e1; stroke-width: 2; fill: none; }
+    ]]></style>
+  </defs>
+
+  <rect width="1120" height="600" rx="28" fill="url(#bg)" />
+  <circle cx="100" cy="100" r="120" fill="#dbeafe" opacity="0.3" />
+  <circle cx="1020" cy="500" r="100" fill="#dcfce7" opacity="0.3" />
+
+  <!-- Vertical connector line -->
+  <path class="connector" d="M 80 90 L 80 530" />
+
+  <!-- Step 1 -->
+  <circle cx="80" cy="72" r="20" fill="#2563eb" />
+  <text class="step-num" x="73" y="79">1</text>
+  <rect class="card" x="120" y="44" width="420" height="56" rx="16" fill="url(#card-fill)" filter="url(#shadow)" />
+  <text class="where" x="140" y="62" fill="#2563eb">Mac</text>
+  <text class="step-title" x="200" y="62">Open the auth tunnel</text>
+  <text class="code" x="140" y="84">claw-auth</text>
+
+  <!-- Step 2 -->
+  <circle cx="80" cy="142" r="20" fill="#2563eb" />
+  <text class="step-num" x="73" y="149">2</text>
+  <rect class="card" x="120" y="114" width="560" height="56" rx="16" fill="url(#card-fill)" filter="url(#shadow)" />
+  <text class="where" x="140" y="132" fill="#7c3aed">VPS (via tunnel)</text>
+  <text class="step-title" x="280" y="132">Start the OAuth flow</text>
+  <text class="code" x="140" y="154">openclaw models auth login --provider openai-codex --set-default</text>
+
+  <!-- Step 3 -->
+  <circle cx="80" cy="212" r="20" fill="#2563eb" />
+  <text class="step-num" x="73" y="219">3</text>
+  <rect class="card" x="120" y="184" width="420" height="56" rx="16" fill="url(#card-fill)" filter="url(#shadow)" />
+  <text class="where" x="140" y="202" fill="#2563eb">Mac</text>
+  <text class="step-title" x="200" y="202">Open the auth URL in your browser</text>
+  <text class="step-detail" x="140" y="224">Copy the URL printed to terminal</text>
+
+  <!-- Step 4 -->
+  <circle cx="80" cy="282" r="20" fill="#2563eb" />
+  <text class="step-num" x="73" y="289">4</text>
+  <rect class="card" x="120" y="254" width="500" height="56" rx="16" fill="url(#card-fill)" filter="url(#shadow)" />
+  <text class="where" x="140" y="272" fill="#059669">Browser</text>
+  <text class="step-title" x="230" y="272">Log in to OpenAI, browser redirects</text>
+  <text class="step-detail" x="140" y="294">Callback hits 127.0.0.1:1455 &#x2192; tunnel carries it to VPS</text>
+
+  <!-- Step 5 -->
+  <circle cx="80" cy="352" r="20" fill="#2563eb" />
+  <text class="step-num" x="73" y="359">5</text>
+  <rect class="card" x="120" y="324" width="480" height="56" rx="16" fill="url(#ok-fill)" filter="url(#shadow)" style="stroke: #86efac;" />
+  <text class="where" x="140" y="342" fill="#16a34a">VPS</text>
+  <text class="step-title" x="200" y="342" style="fill: #16a34a;">Token stored &#x2713;</text>
+  <text class="code" x="140" y="364" style="fill: #16a34a;">openclaw models status</text>
+  <text class="step-detail" x="360" y="364">&#x2190; verify it worked</text>
+
+  <!-- Step 6 -->
+  <circle cx="80" cy="422" r="20" fill="#dc2626" />
+  <text class="step-num" x="73" y="429">6</text>
+  <rect class="card" x="120" y="394" width="520" height="56" rx="16" fill="url(#warn-fill)" filter="url(#shadow)" style="stroke: #fbbf24;" />
+  <text class="where" x="140" y="412" fill="#b45309">Critical</text>
+  <text class="step-title" x="230" y="412" style="fill: #b45309;">Close claw-auth immediately</text>
+  <text class="step-detail" x="140" y="434">Don't minimize it. Don't switch tabs. Close it now.</text>
+
+  <!-- Summary bar -->
+  <rect class="card" x="120" y="480" width="880" height="80" rx="20" fill="url(#card-fill)" filter="url(#shadow)" />
+  <text class="step-title" x="160" y="510">The whole flow takes under a minute.</text>
+  <text class="step-detail" x="160" y="536">The tunnel is scaffolding &#x2014; take it down the moment the token is stored. Go back to the normal claw alias.</text>
+</svg>
