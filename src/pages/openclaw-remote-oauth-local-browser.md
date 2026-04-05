@@ -35,14 +35,12 @@ This is the distinction that tripped me up. Not all remote auth flows work the s
         D2 --&gt; D3["Type the code"]
         D3 --&gt; D4["CLI polls and picks&lt;br&gt;up the token ✓"]
     end
-
     subgraph oauth["OAuth Redirect Flow (OpenClaw)"]
         direction LR
         O1["CLI opens OAuth URL"] --&gt; O2["You log in via browser"]
         O2 --&gt; O3["Browser redirects to&lt;br&gt;127.0.0.1:1455/callback"]
         O3 --&gt; O4["❌ Nothing is listening&lt;br&gt;on your Mac's port 1455"]
     end
-
     style device fill:#e8f5e9,stroke:#43a047
     style oauth fill:#fff3e0,stroke:#ef6c00</code></pre>
 </details>
@@ -100,7 +98,6 @@ One extra alias. That's it.
     B --&gt; C["Browser opens&lt;br&gt;OAuth URL"]
     C --&gt; D["Browser redirects to&lt;br&gt;http://127.0.0.1:1455/callback"]
     D --&gt;|"traffic flows through&lt;br&gt;SSH tunnel"| A
-
     style A fill:#e3f2fd,stroke:#1565c0
     style B fill:#f3e5f5,stroke:#7b1fa2
     style D fill:#e8f5e9,stroke:#2e7d32</code></pre>
@@ -159,7 +156,6 @@ When OpenClaw needs browser-based OAuth on the VPS:
     participant SSH as SSH Tunnel
     participant VPS as VPS (OpenClaw)
     participant Browser as Local Browser
-
     Mac-&gt;&gt;SSH: jack-auth (opens tunnel on port 1455)
     Mac-&gt;&gt;VPS: openclaw models auth login&lt;br&gt;--provider openai-codex --set-default
     VPS--&gt;&gt;Mac: Auth URL printed to terminal
@@ -249,7 +245,6 @@ The annoying part: the switch is conceptually simple but operationally awkward o
         G3["Your browser is on your Mac&lt;br&gt;(different machine)"]
         G1 --- G2 --- G3
     end
-
     subgraph fix["jack-auth Bridges It"]
         direction TB
         F1["SSH -L 1455:127.0.0.1:1455"]
@@ -257,9 +252,7 @@ The annoying part: the switch is conceptually simple but operationally awkward o
         F3["Browser callback lands&lt;br&gt;on the right machine ✓"]
         F1 --- F2 --- F3
     end
-
     gap --&gt; fix
-
     style gap fill:#fff3e0,stroke:#ef6c00
     style fix fill:#e8f5e9,stroke:#2e7d32</code></pre>
 </details>
