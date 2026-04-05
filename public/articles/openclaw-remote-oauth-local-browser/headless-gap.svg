@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1120" height="420" viewBox="0 0 1120 420" role="img" aria-labelledby="title desc">
   <title id="title">The headless VPS gap and the fix</title>
-  <desc id="desc">Diagram showing the disconnect between a headless VPS and a local browser, and how jack-auth bridges it with SSH port forwarding.</desc>
+  <desc id="desc">Diagram showing the disconnect between a headless VPS and a local browser, and how claw-auth bridges it with SSH port forwarding.</desc>
   <defs>
     <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" stop-color="#f8fbff" />
@@ -72,7 +72,7 @@
   <!-- Fix side (right) -->
   <rect class="group-fix" x="600" y="40" width="480" height="340" rx="24" />
   <rect class="section-pill" x="620" y="52" width="220" height="30" rx="15" style="stroke: #86efac;" />
-  <text class="section-label" x="640" y="72" style="fill: #16a34a;">jack-auth Bridges It</text>
+  <text class="section-label" x="640" y="72" style="fill: #16a34a;">claw-auth Bridges It</text>
 
   <rect class="card" x="630" y="100" width="220" height="100" rx="20" fill="url(#card-fill)" filter="url(#shadow)" />
   <text class="title" x="660" y="134" style="fill: #6d28d9;">SSH tunnel</text>
@@ -87,7 +87,7 @@
   <rect class="card" x="630" y="230" width="430" height="100" rx="20" fill="url(#fix-fill)" filter="url(#shadow)" style="stroke: #86efac;" />
   <text class="title" x="660" y="268" style="fill: #16a34a;">Browser callback lands on VPS &#x2713;</text>
   <text class="body" x="660" y="296">OAuth completes. Token stored on VPS.</text>
-  <text class="meta" x="660" y="316">Close jack-auth. Use jack for work.</text>
+  <text class="meta" x="660" y="316">Close claw-auth. Use claw for work.</text>
 
   <path style="stroke: #16a34a; stroke-width: 2; fill: none;" d="M 850 200 L 850 230" />
 </svg>

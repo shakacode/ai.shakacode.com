@@ -52,7 +52,7 @@ On a headless VPS, that's a problem.
 My day-to-day alias drops me straight into a persistent tmux session on the VPS:
 
 ```zsh
-alias jack='echo -ne "\033]0;Jack (OpenClaw Droplet)\007" && ssh -t -i ~/.ssh/vps_ed25519 user@203.0.113.10 "tmux -CC attach -t work || tmux -CC new -s work"'
+alias claw='echo -ne "\033]0;Claw (OpenClaw Droplet)\007" && ssh -t -i ~/.ssh/vps_ed25519 user@203.0.113.10 "tmux -CC attach -t work || tmux -CC new -s work"'
 ```
 
 It's great for regular work:
@@ -65,7 +65,7 @@ But it does **not** forward the OAuth callback port. So when OpenClaw started th
 
 ## My First Instinct Was Wrong
 
-My first move was to bolt `-L 1455:127.0.0.1:1455` onto the regular `jack` alias. It worked! But it created a mess:
+My first move was to bolt `-L 1455:127.0.0.1:1455` onto the regular `claw` alias. It worked! But it created a mess:
 
 - my normal shell session now carried a hidden auth tunnel I'd forget about
 - if that session was attached to a persistent tmux session, the tunnel just lived there indefinitely
@@ -76,7 +76,7 @@ That's the wrong mental model. Auth should be temporary. Start it, finish the fl
 ## The Clean Fix: A Separate Auth Alias
 
 ```zsh
-alias jack-auth='echo -ne "\033]0;Jack (OpenClaw Auth)\007" && ssh -L 1455:127.0.0.1:1455 -i ~/.ssh/vps_ed25519 user@203.0.113.10'
+alias claw-auth='echo -ne "\033]0;Claw (OpenClaw Auth)\007" && ssh -L 1455:127.0.0.1:1455 -i ~/.ssh/vps_ed25519 user@203.0.113.10'
 ```
 
 One extra alias. That's it.
@@ -111,21 +111,21 @@ Here's what I keep in my shell config:
 
 ```zsh
 # Day-to-day work — persistent tmux, no port forwarding
-alias jack='echo -ne "\033]0;Jack (OpenClaw Droplet)\007" && ssh -t -i ~/.ssh/vps_ed25519 user@203.0.113.10 "tmux -CC attach -t work || tmux -CC new -s work"'
+alias claw='echo -ne "\033]0;Claw (OpenClaw Droplet)\007" && ssh -t -i ~/.ssh/vps_ed25519 user@203.0.113.10 "tmux -CC attach -t work || tmux -CC new -s work"'
 
 # Temporary OAuth tunnel — port forwarding, no tmux
-alias jack-auth='echo -ne "\033]0;Jack (OpenClaw Auth)\007" && ssh -L 1455:127.0.0.1:1455 -i ~/.ssh/vps_ed25519 user@203.0.113.10'
+alias claw-auth='echo -ne "\033]0;Claw (OpenClaw Auth)\007" && ssh -L 1455:127.0.0.1:1455 -i ~/.ssh/vps_ed25519 user@203.0.113.10'
 ```
 
 If `~/.ssh/vps_ed25519` isn't your key path, the quickest ways to find yours:
 
-- already have a working alias? run `alias jack` and check the `-i` argument
-- use `~/.ssh/config`? run `ssh -G jack | rg '^identityfile '`
+- already have a working alias? run `alias claw` and check the `-i` argument
+- use `~/.ssh/config`? run `ssh -G claw | rg '^identityfile '`
 - just want to see what keys exist? run `ls ~/.ssh`
 
 The key difference between the two aliases:
 
-| | `jack` | `jack-auth` |
+| | `claw` | `claw-auth` |
 |---|---|---|
 | **Purpose** | Day-to-day work | OAuth login flow |
 | **tmux** | Yes, persistent session | No |
@@ -133,7 +133,7 @@ The key difference between the two aliases:
 | **Lifetime** | Long-lived | Temporary — close after auth |
 | **When to use** | Any time you need a shell | Only when OpenClaw needs browser OAuth |
 
-The important part: `jack-auth` intentionally does **not** use tmux. For a one-off login flow, you don't want persistent state. You want a clean shell, a live tunnel, a successful auth, and then an exit.
+The important part: `claw-auth` intentionally does **not** use tmux. For a one-off login flow, you don't want persistent state. You want a clean shell, a live tunnel, a successful auth, and then an exit.
 
 ## The Login Flow Step by Step
 
@@ -156,7 +156,7 @@ When OpenClaw needs browser-based OAuth on the VPS:
     participant SSH as SSH Tunnel
     participant VPS as VPS (OpenClaw)
     participant Browser as Local Browser
-    Mac-&gt;&gt;SSH: jack-auth (opens tunnel on port 1455)
+    Mac-&gt;&gt;SSH: claw-auth (opens tunnel on port 1455)
     Mac-&gt;&gt;VPS: openclaw models auth login&lt;br&gt;--provider openai-codex --set-default
     VPS--&gt;&gt;Mac: Auth URL printed to terminal
     Mac-&gt;&gt;Browser: Open the URL
@@ -165,12 +165,12 @@ When OpenClaw needs browser-based OAuth on the VPS:
     SSH-&gt;&gt;VPS: Forward callback through tunnel
     VPS--&gt;&gt;VPS: Token stored ✓
     Mac-&gt;&gt;VPS: openclaw models status (verify)
-    Mac-&gt;&gt;SSH: Exit jack-auth session</code></pre>
+    Mac-&gt;&gt;SSH: Exit claw-auth session</code></pre>
 </details>
 
 In practice:
 
-1. On your Mac, run `jack-auth`
+1. On your Mac, run `claw-auth`
 2. In that SSH session, start the auth flow:
 
 ```bash
@@ -187,11 +187,11 @@ Or if you're in the full setup wizard: `openclaw onboard`
 openclaw models status
 ```
 
-6. **Close the `jack-auth` terminal immediately.** Don't minimize it. Don't switch to another tab and forget about it. Close it.
+6. **Close the `claw-auth` terminal immediately.** Don't minimize it. Don't switch to another tab and forget about it. Close it.
 
-Go back to the normal `jack` alias for regular work.
+Go back to the normal `claw` alias for regular work.
 
-## When You Don't Need `jack-auth`
+## When You Don't Need `claw-auth`
 
 This is the part that's easy to overuse.
 
@@ -203,7 +203,7 @@ codex login --device-auth
 
 Device-code auth doesn't need a localhost callback. The CLI gives you a URL and code to enter manually. Your local browser is just a browser — it doesn't need to talk back to the VPS on port 1455.
 
-You specifically need `jack-auth` for flows that expect a browser callback to a process listening on the VPS loopback interface. That's why this came up with OpenClaw OAuth and not with Codex device auth.
+You specifically need `claw-auth` for flows that expect a browser callback to a process listening on the VPS loopback interface. That's why this came up with OpenClaw OAuth and not with Codex device auth.
 
 ## Why This Matters More for OpenAI Than Claude Right Now
 
@@ -228,10 +228,10 @@ The annoying part: the switch is conceptually simple but operationally awkward o
 <figure class="diagram-card">
   <img
     src="/articles/openclaw-remote-oauth-local-browser/headless-gap.svg"
-    alt="Diagram showing the headless VPS gap and how jack-auth bridges it with SSH port forwarding."
+    alt="Diagram showing the headless VPS gap and how claw-auth bridges it with SSH port forwarding."
   />
   <figcaption>
-    <strong>The gap and the fix:</strong> <code>jack-auth</code> bridges the disconnect between your local browser and the remote OpenClaw process by forwarding port 1455 through the SSH connection.
+    <strong>The gap and the fix:</strong> <code>claw-auth</code> bridges the disconnect between your local browser and the remote OpenClaw process by forwarding port 1455 through the SSH connection.
   </figcaption>
 </figure>
 
@@ -245,7 +245,7 @@ The annoying part: the switch is conceptually simple but operationally awkward o
         G3["Your browser is on your Mac&lt;br&gt;(different machine)"]
         G1 --- G2 --- G3
     end
-    subgraph fix["jack-auth Bridges It"]
+    subgraph fix["claw-auth Bridges It"]
         direction TB
         F1["SSH -L 1455:127.0.0.1:1455"]
         F2["Mac port 1455 → VPS port 1455"]
@@ -259,13 +259,13 @@ The annoying part: the switch is conceptually simple but operationally awkward o
 
 ## Seriously, Close That Auth Terminal
 
-I cannot stress this enough. Once OAuth succeeds, **close `jack-auth` immediately.**
+I cannot stress this enough. Once OAuth succeeds, **close `claw-auth` immediately.**
 
 OpenClaw stores the resulting credentials on the VPS. The tunnel has done its job. But if you leave that session open — and you will, because it looks like any other terminal — here's what happens three days later:
 
 - you have four terminal tabs open to the same VPS
 - one of them is silently forwarding port 1455 and you don't remember which
-- you try to open a *new* `jack-auth` session and get `bind: Address already in use`
+- you try to open a *new* `claw-auth` session and get `bind: Address already in use`
 - you can't figure out what's holding the port
 - you start killing SSH sessions at random
 - you accidentally kill your working tmux session
@@ -274,18 +274,18 @@ Ask me how I know.
 
 The right lifecycle is exactly four steps:
 
-1. Start `jack-auth`
+1. Start `claw-auth`
 2. Complete auth
 3. Verify auth worked (`openclaw models status`)
-4. **Close `jack-auth` right now, not later**
+4. **Close `claw-auth` right now, not later**
 
 The tunnel is dead weight the moment the token is stored. Treat it like scaffolding — take it down as soon as the wall is up.
 
 ## The Rule of Thumb
 
-- Doing normal work on the box? **`jack`**
-- Doing a remote OAuth flow that needs your local browser to callback into the VPS? **`jack-auth`**
-- Auth done? **Close `jack-auth`. Now. Not in five minutes. Now.**
+- Doing normal work on the box? **`claw`**
+- Doing a remote OAuth flow that needs your local browser to callback into the VPS? **`claw-auth`**
+- Auth done? **Close `claw-auth`. Now. Not in five minutes. Now.**
 
 That one separation — and the discipline to actually close the auth session — made the whole setup feel obvious instead of mysterious.
 

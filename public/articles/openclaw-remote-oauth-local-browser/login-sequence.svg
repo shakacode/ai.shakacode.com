@@ -45,7 +45,7 @@
   <rect class="card" x="120" y="44" width="420" height="56" rx="16" fill="url(#card-fill)" filter="url(#shadow)" />
   <text class="where" x="140" y="62" fill="#2563eb">Mac</text>
   <text class="step-title" x="200" y="62">Open the auth tunnel</text>
-  <text class="code" x="140" y="84">jack-auth</text>
+  <text class="code" x="140" y="84">claw-auth</text>
 
   <!-- Step 2 -->
   <circle cx="80" cy="142" r="20" fill="#2563eb" />
@@ -85,11 +85,11 @@
   <text class="step-num" x="73" y="429">6</text>
   <rect class="card" x="120" y="394" width="520" height="56" rx="16" fill="url(#warn-fill)" filter="url(#shadow)" style="stroke: #fbbf24;" />
   <text class="where" x="140" y="412" fill="#b45309">Critical</text>
-  <text class="step-title" x="230" y="412" style="fill: #b45309;">Close jack-auth immediately</text>
+  <text class="step-title" x="230" y="412" style="fill: #b45309;">Close claw-auth immediately</text>
   <text class="step-detail" x="140" y="434">Don't minimize it. Don't switch tabs. Close it now.</text>
 
   <!-- Summary bar -->
   <rect class="card" x="120" y="480" width="880" height="80" rx="20" fill="url(#card-fill)" filter="url(#shadow)" />
   <text class="step-title" x="160" y="510">The whole flow takes under a minute.</text>
-  <text class="step-detail" x="160" y="536">The tunnel is scaffolding &#x2014; take it down the moment the token is stored. Go back to the normal jack alias.</text>
+  <text class="step-detail" x="160" y="536">The tunnel is scaffolding &#x2014; take it down the moment the token is stored. Go back to the normal claw alias.</text>
 </svg>
