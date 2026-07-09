@@ -6,6 +6,9 @@ author: "Justin Gordon, CEO of ShakaCode"
 date: "February 2026"
 ---
 
+This is a test.
+
+
 If you lead an engineering team in 2026, you've probably noticed: everyone's using AI coding tools, but nobody agrees on how to govern them.
 
 Some companies are mandating AI usage in performance reviews. Others are firing engineers who don't adopt. Others are publishing careful, evolving guidelines. And most are somewhere in between—figuring it out as they go, hoping they don't break too much along the way.
